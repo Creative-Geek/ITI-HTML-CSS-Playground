@@ -1,143 +1,196 @@
-* {
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0px;
-  padding: 0px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(4, 15, 46, 1);
+  color: #e4e4e7;
 }
 
-.logoText {
-  margin-left: 5px;
-}
-
-.logo {
-  font-size: 1.5rem;
+main {
+  flex: 1;
 }
 
 nav {
   display: flex;
   align-items: center;
-  flex-direction: row;
-  padding: 1rem 5%;
-  background-color: rgb(28, 100, 163);
-  color: white;
-}
-
-.navItems {
-  display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  width: 100%;
-}
-.navItems li,
-a {
-  list-style-type: none;
-  text-decoration: none;
-  padding: 10px;
-  margin: 0;
-  color: white;
-  border-radius: 20px;
-  cursor: pointer;
-}
-.navItems li {
-  background-color: rgb(77, 164, 240);
-  transition: all 0.3s ease-in-out;
-}
-.navItems li:hover,
-a:hover {
-  background-color: rgb(0, 136, 255);
-}
-
-.navItems li:hover {
-  background-color: rgb(0, 136, 255);
-  transition: all 0.3s ease-in-out;
+  padding: 1rem 5%;
+  background-color: rgba(7, 22, 58, 1);
+  color: #f4f4f5;
+  border-bottom: 1px solid rgba(12, 32, 72, 1);
 }
 
 .logoContainer {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 10px;
-  margin-right: 10vw;
-  width: 200px;
+  flex-shrink: 0;
 }
+
+.logo {
+  height: 3rem;
+  width: auto;
+}
+
+.logoText {
+  font-weight: 700;
+  font-size: 1.25rem;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+}
+
+.navItems {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.navItems li {
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.navItems li:hover {
+  background-color: rgba(2, 187, 243, 1);
+}
+
+.navItems li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #a1a1aa;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navItems li:hover a {
+  color: #fff;
+}
+
 .hero {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  position: relative; /* this makes any absolute children position relative to this element */
+  background-color: rgba(5, 18, 52, 1);
 }
 
 .hero img {
+  display: block;
   width: 100%;
-  filter: blur(0px);
   height: 70vh;
   object-fit: cover;
-  transition: all 0.3s ease-in-out;
+  filter: brightness(0.5);
+  transition: filter 0.4s ease;
 }
 
-.hero img:hover {
-  filter: blur(5px);
-  transition: all 0.3s ease-in-out;
+.hero:hover img {
+  filter: brightness(0.35) blur(4px);
 }
 
 .title {
-  /* ~~it feels like it's a bit to the bottom more than the top, I don't know why~~ see the comment on the hero class */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: white;
-  font-size: 3rem;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  color: #f4f4f5;
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
 }
+
 .product-categories {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
+  justify-content: center;
+  align-items: stretch;
   gap: 2rem;
-  padding: 5rem;
+  padding: 5rem 5%;
+  text-align: center;
+  background-color: rgba(4, 15, 46, 1);
 }
 
 .category-card {
+  flex: 1;
+  max-width: 340px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   border-radius: 1rem;
-  background-color: white;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  background-color: rgba(7, 22, 58, 1);
+  border: 1px solid rgba(12, 32, 72, 1);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
+/* .category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 32px rgba(2, 187, 243, 0.2);
+  border-color: rgba(2, 187, 243, 1);
+} */
+
 .category-image {
-  /* width: 200px;
-  height: 200px;
-  object-fit: cover; */
   font-size: 5rem;
-  /* text-align: center; */
+  line-height: 1;
 }
 
 .category-title {
-  font-size: 2rem;
-  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f4f4f5;
+  margin-top: 0.5rem;
 }
 
 .category-description {
+  font-size: 0.95rem;
+  color: #a1a1aa;
+  line-height: 1.5;
+}
+
+.category-link {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  background-color: rgba(2, 187, 243, 1);
+  color: #fff;
+  text-decoration: none;
   font-size: 1rem;
-  margin-top: 1rem;
+  font-weight: 600;
+  margin-top: 0.75rem;
+  transition: background-color 0.2s ease;
+}
+
+.category-link:hover {
+  background-color: rgba(2, 160, 210, 1);
+}
+
+.category-link:visited {
+  color: #fff;
 }
 
 footer {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background-color: rgb(28, 100, 163);
-  color: white;
+  background-color: rgba(7, 22, 58, 1);
+  border-top: 1px solid rgba(12, 32, 72, 1);
+  color: #71717a;
   text-align: center;
+  font-size: 0.9rem;
 }

@@ -3,51 +3,106 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <title>Fresh Products</title>
+    <title>ByteShop — Your Tech Store</title>
   </head>
   <body>
     <header>
       <nav>
         <div class="logoContainer">
-          <span class="logo">🥶</span>
-          <span class="logoText">Cold Store</span>
+          <img class="logo" src="/bytestorelogo.svg" alt="byteStore Logo" />
+          <!-- <span class="logoText">byteStore</span> -->
         </div>
         <ul class="navItems">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="#">Products</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </header>
     <main>
       <section class="hero">
         <img src="/hero.png" alt="Hero Image" />
-        <h1 class="title">Not So Fresh Products!</h1>
+        <h1 class="title">Next-Gen Tech, Today.</h1>
       </section>
-      <section
-        class="product-categories"
-        style="background-color: rgb(199, 199, 199)"
-      >
+      <section class="product-categories">
         <div class="category-card">
-          <div class="category-image">🍎</div>
-          <h2 class="category-title">Fruits</h2>
-          <p class="category-description">A variety of fresh fruits</p>
+          <div class="category-image">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="70"
+              height="70"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="rgba(2, 187, 243, 1)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+          </div>
+          <h2 class="category-title">Laptops</h2>
+          <p class="category-description">
+            Powerful machines for work &amp; play
+          </p>
+          <a class="category-link" href="#">Browse</a>
         </div>
         <div class="category-card">
-          <div class="category-image">🍞</div>
-          <h2 class="category-title">Bread</h2>
-          <p class="category-description">A variety of fresh fruits</p>
+          <div class="category-image">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="70"
+              height="70"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="rgba(2, 187, 243, 1)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="5" y="2" width="14" height="20" rx="2" />
+              <line x1="12" y1="18" x2="12" y2="18.01" />
+            </svg>
+          </div>
+          <h2 class="category-title">Smartphones</h2>
+          <p class="category-description">
+            Stay connected with the latest devices
+          </p>
+          <a class="category-link" href="#">Browse</a>
         </div>
         <div class="category-card">
-          <div class="category-image">🥛</div>
-          <h2 class="category-title">Fruits</h2>
-          <p class="category-description">A variety of fresh fruits</p>
+          <div class="category-image">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="70"
+              height="70"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="rgba(2, 187, 243, 1)"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+              <path
+                d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"
+              />
+              <path
+                d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"
+              />
+            </svg>
+          </div>
+          <h2 class="category-title">Accessories</h2>
+          <p class="category-description">Headphones, chargers &amp; more</p>
+          <a class="category-link" href="#">Browse</a>
         </div>
       </section>
     </main>
     <footer>
-      <span>&copy; 2026 My Website</span>
+      <span>&copy; 2026 byteStore</span>
     </footer>
   </body>
 </html>

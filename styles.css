@@ -29,6 +29,26 @@ nav {
   border-bottom: 1px solid rgba(12, 32, 72, 1);
 }
 
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: rgba(2, 187, 243, 1);
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: rgba(2, 160, 210, 1);
+}
+
 .logoContainer {
   display: flex;
   align-items: center;
@@ -92,11 +112,13 @@ nav {
   height: 70vh;
   object-fit: cover;
   filter: brightness(0.5);
-  transition: filter 0.4s ease;
+  transition: filter 0.4s ease, transform 0.4s ease;
 }
 
 .hero:hover img {
   filter: brightness(0.35) blur(4px);
+  transform: scale(1.02);
+  transition: filter 0.4s ease, transform 0.4s ease;
 }
 
 .title {
@@ -109,6 +131,32 @@ nav {
   font-size: 3.5rem;
   font-weight: 800;
   letter-spacing: -0.03em;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #f4f4f5;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero-buttons {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .product-categories {

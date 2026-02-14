@@ -1,3 +1,68 @@
+// View Transitions - Stack Navigator Pattern
+// Detect navigation direction and set appropriate transition type
+
+function getPageDepth(pathname) {
+  // Handle various path formats
+  const cleanPath = pathname.split('/').pop() || 'index.html';
+  const path = cleanPath === '' ? 'index.html' : cleanPath;
+
+  // Define navigation depth hierarchy
+  const depths = {
+    'index.html': 0,
+    '': 0,
+    'about.html': 1,
+    'products.html': 1,
+    'contact.html': 1,
+    'libManagementSystem.html': 2
+  };
+  return depths[path] !== undefined ? depths[path] : 1;
+}
+
+// On old page - before navigation
+window.addEventListener("pageswap", async (e) => {
+  if (!e.viewTransition) {
+    console.log('View Transition not available');
+    return;
+  }
+
+  const fromUrl = new URL(e.activation.from.url);
+  const toUrl = new URL(e.activation.entry.url);
+
+  const fromDepth = getPageDepth(fromUrl.pathname);
+  const toDepth = getPageDepth(toUrl.pathname);
+
+  console.log('Pageswap:', fromUrl.pathname, '->', toUrl.pathname, '| Depth:', fromDepth, '->', toDepth);
+
+  // Determine transition type based on navigation depth
+  if (e.activation.navigationType === 'reload') {
+    e.viewTransition.types.add("reload");
+    console.log('Transition type: reload');
+  } else if (toDepth > fromDepth) {
+    // Going deeper: Home -> About/Products/Contact/Library
+    e.viewTransition.types.add("push");
+    console.log('Transition type: push');
+  } else if (toDepth < fromDepth) {
+    // Going back: Any page -> Home
+    e.viewTransition.types.add("pop");
+    console.log('Transition type: pop');
+  } else {
+    // Same level: About <-> Products <-> Contact
+    // Use push for visual consistency
+    e.viewTransition.types.add("push");
+    console.log('Transition type: push (same level)');
+  }
+});
+
+// On new page - after navigation
+window.addEventListener("pagereveal", async (e) => {
+  if (!e.viewTransition) {
+    console.log('No view transition on pagereveal');
+    document.body.style.opacity = '1';
+    return;
+  }
+  console.log('Pagereveal with transition types:', [...e.viewTransition.types]);
+});
+
 // take user input: Name, Age, grades (multiple grades)
 // user enters stop or empty string -> we stop taking grades
 // contraint: grades must be 3 at least, each between 0 and 100 and must be a number (errors should display a message and ask again)

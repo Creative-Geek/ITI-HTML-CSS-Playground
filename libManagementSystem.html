@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
+
     <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&amp;family=Rajdhani:wght@300;400;500;600;700&amp;display=swap"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <title>Library Management System — ByteShop</title>
+    <link rel="stylesheet" href="styles.css" />
     <style>
       .library-container {
         display: flex;
@@ -43,7 +49,7 @@
         border-radius: 8px;
         background-color: rgba(2, 187, 243, 1);
         color: #fff;
-        font-family: 'Orbitron', sans-serif;
+        font-family: "Orbitron", sans-serif;
         font-size: 0.95rem;
         font-weight: 600;
         cursor: pointer;
@@ -241,7 +247,7 @@
         padding: 0.75rem;
         border: none;
         border-radius: 8px;
-        font-family: 'Orbitron', sans-serif;
+        font-family: "Orbitron", sans-serif;
         font-size: 1rem;
         font-weight: 600;
         cursor: pointer;
@@ -318,15 +324,49 @@
         opacity: 0.5;
       }
 
-      @media (max-width: 768px) {
+      /* Tablet and below */
+      @media (max-width: 991.98px) {
         .library-container {
           flex-direction: column;
-          padding: 2rem 5%;
+          padding: 2rem 1rem;
+          gap: 1.5rem;
         }
 
         .library-sidebar {
           flex: none;
           width: 100%;
+        }
+
+        .stats-cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 767.98px) {
+        .library-container {
+          padding: 1.5rem 1rem;
+        }
+
+        .library-sidebar {
+          padding: 1.5rem;
+        }
+
+        .library-sidebar h2 {
+          font-size: 1.25rem;
+        }
+
+        .menu-btn {
+          padding: 0.875rem;
+          font-size: 0.9rem;
+        }
+
+        .books-section {
+          padding: 1.5rem;
+        }
+
+        .books-section h2 {
+          font-size: 1.25rem;
         }
 
         .books-table {
@@ -342,45 +382,104 @@
           padding: 0.2rem 0.5rem;
           font-size: 0.7rem;
         }
+
+        .modal-content {
+          padding: 2rem 1.5rem;
+          width: 95%;
+        }
+
+        .modal-content h2 {
+          font-size: 1.25rem;
+        }
+
+        .stat-box {
+          padding: 1.25rem;
+        }
+
+        .stat-box h3 {
+          font-size: 1.75rem;
+        }
+      }
+
+      /* Small mobile */
+      @media (max-width: 575.98px) {
+        .stats-cards {
+          grid-template-columns: 1fr;
+        }
+
+        .modal-buttons {
+          flex-direction: column;
+        }
+
+        .modal-buttons button {
+          width: 100%;
+        }
       }
     </style>
   </head>
   <body>
-    <header>
-      <nav>
-        <div class="logoContainer">
-          <img class="logo" src="/bytestorelogo.svg" alt="byteStore Logo" />
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container-fluid px-4">
+        <a class="navbar-brand" href="index.html">
+          <img src="bytestorelogo.svg" alt="byteStore Logo" />
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNav"
+          aria-controls="mainNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav mx-auto gap-1">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="products.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+          <div class="d-grid gap-2 d-lg-flex">
+            <button
+              class="btn btn-accent"
+              type="button"
+              onclick="studentManagement()"
+            >
+              Student Management
+            </button>
+            <button
+              class="btn btn-green"
+              type="button"
+              onclick="window.location.href='libManagementSystem.html'"
+            >
+              Library System
+            </button>
+          </div>
         </div>
-        <ul class="navItems">
-          <li><a href="bootstrapHome.html">Home</a></li>
-          <li><a href="bootstrapAbout.html">About</a></li>
-          <li><a href="bootstrapProducts.html">Products</a></li>
-          <li><a href="bootstrapContact.html">Contact</a></li>
-        </ul>
-        <div class="nav-buttons">
-          <button
-            class="button"
-            style="border: none"
-            onclick="studentManagement()"
-          >
-            Student Management
-          </button>
-          <button
-            class="button button-green"
-            style="border: none"
-            onclick="window.location.href='libManagementSystem.html'"
-          >
-            Library System
-          </button>
-        </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
 
     <main>
-      <div class="page-header">
-        <h1>Library Management System</h1>
-        <p>Manage your book collection with ease</p>
-      </div>
+      <section class="text-center py-5 page-header-gradient">
+        <div class="container">
+          <h1 class="fw-bold mb-3">Library Management System</h1>
+          <p class="lead text-body-secondary">
+            Manage your book collection with ease
+          </p>
+        </div>
+      </section>
 
       <div class="library-container">
         <aside class="library-sidebar">
@@ -421,7 +520,7 @@
 
           <div class="books-section">
             <h2>Library Collection</h2>
-            <div id="booksTableContainer">
+            <div class="table-responsive" id="booksTableContainer">
               <table class="books-table">
                 <thead>
                   <tr>
@@ -433,8 +532,7 @@
                     <th>Borrow Count</th>
                   </tr>
                 </thead>
-                <tbody id="booksTableBody">
-                </tbody>
+                <tbody id="booksTableBody"></tbody>
               </table>
             </div>
           </div>
@@ -456,11 +554,18 @@
         </div>
         <div class="form-group">
           <label for="copies">Number of Copies</label>
-          <input type="number" id="copies" placeholder="Enter number of copies" min="1" />
+          <input
+            type="number"
+            id="copies"
+            placeholder="Enter number of copies"
+            min="1"
+          />
         </div>
         <div class="modal-buttons">
           <button class="btn-primary" onclick="addBook()">Add Book</button>
-          <button class="btn-secondary" onclick="closeModal('addBookModal')">Cancel</button>
+          <button class="btn-secondary" onclick="closeModal('addBookModal')">
+            Cancel
+          </button>
         </div>
       </div>
     </div>
@@ -471,11 +576,17 @@
         <h2>Borrow Book</h2>
         <div class="form-group">
           <label for="borrowTitle">Book Title</label>
-          <input type="text" id="borrowTitle" placeholder="Enter book title to borrow" />
+          <input
+            type="text"
+            id="borrowTitle"
+            placeholder="Enter book title to borrow"
+          />
         </div>
         <div class="modal-buttons">
           <button class="btn-primary" onclick="borrowBook()">Borrow</button>
-          <button class="btn-secondary" onclick="closeModal('borrowModal')">Cancel</button>
+          <button class="btn-secondary" onclick="closeModal('borrowModal')">
+            Cancel
+          </button>
         </div>
       </div>
     </div>
@@ -486,34 +597,44 @@
         <h2>Return Book</h2>
         <div class="form-group">
           <label for="returnTitle">Book Title</label>
-          <input type="text" id="returnTitle" placeholder="Enter book title to return" />
+          <input
+            type="text"
+            id="returnTitle"
+            placeholder="Enter book title to return"
+          />
         </div>
         <div class="modal-buttons">
           <button class="btn-primary" onclick="returnBook()">Return</button>
-          <button class="btn-secondary" onclick="closeModal('returnModal')">Cancel</button>
+          <button class="btn-secondary" onclick="closeModal('returnModal')">
+            Cancel
+          </button>
         </div>
       </div>
     </div>
 
     <!-- Report Modal -->
     <div id="reportModal" class="modal">
-      <div class="modal-content" style="max-width: 700px;">
+      <div class="modal-content" style="max-width: 700px">
         <h2>Library Report</h2>
-        <div id="reportContent" style="max-height: 400px; overflow-y: auto;">
-        </div>
-        <div class="modal-buttons" style="margin-top: 1.5rem;">
-          <button class="btn-secondary" onclick="closeModal('reportModal')">Close</button>
+        <div
+          id="reportContent"
+          style="max-height: 400px; overflow-y: auto"
+        ></div>
+        <div class="modal-buttons" style="margin-top: 1.5rem">
+          <button class="btn-secondary" onclick="closeModal('reportModal')">
+            Close
+          </button>
         </div>
       </div>
     </div>
 
-    <footer>
+    <footer class="text-center py-4">
       <span>&copy; 2026 byteStore — Library Management System</span>
     </footer>
 
     <script>
       // Library data storage key
-      const LIBRARY_KEY = 'byteStore_library';
+      const LIBRARY_KEY = "byteStore_library";
 
       // Initialize library from localStorage or empty array
       function getLibrary() {
@@ -527,11 +648,11 @@
       }
 
       // Show message to user
-      function showMessage(text, type = 'info') {
-        const existing = document.querySelector('.message');
+      function showMessage(text, type = "info") {
+        const existing = document.querySelector(".message");
         if (existing) existing.remove();
 
-        const message = document.createElement('div');
+        const message = document.createElement("div");
         message.className = `message ${type}`;
         message.textContent = text;
         document.body.appendChild(message);
@@ -543,9 +664,11 @@
 
       // Get book status based on available copies
       function getBookStatus(availableCopies) {
-        if (availableCopies > 2) return { label: 'Available', class: 'status-available' };
-        if (availableCopies >= 1) return { label: 'Limited', class: 'status-limited' };
-        return { label: 'Out of Stock', class: 'status-out' };
+        if (availableCopies > 2)
+          return { label: "Available", class: "status-available" };
+        if (availableCopies >= 1)
+          return { label: "Limited", class: "status-limited" };
+        return { label: "Out of Stock", class: "status-out" };
       }
 
       // Calculate total books statistics
@@ -555,7 +678,7 @@
         let totalBorrowed = 0;
         let totalBorrows = 0;
 
-        library.forEach(book => {
+        library.forEach((book) => {
           totalAvailable += book.availableCopies;
           totalBorrowed += book.borrowedCopies;
           totalBorrows += book.borrowCount || 0;
@@ -565,24 +688,27 @@
           totalAvailable,
           totalBorrowed,
           totalBooks: library.length,
-          totalBorrows
+          totalBorrows,
         };
       }
 
       // Update statistics display
       function updateStats() {
         const stats = calculateTotalBooks();
-        document.getElementById('totalBooks').textContent = stats.totalBooks;
-        document.getElementById('availableBooks').textContent = stats.totalAvailable;
-        document.getElementById('borrowedBooks').textContent = stats.totalBorrowed;
-        document.getElementById('totalBorrows').textContent = stats.totalBorrows;
+        document.getElementById("totalBooks").textContent = stats.totalBooks;
+        document.getElementById("availableBooks").textContent =
+          stats.totalAvailable;
+        document.getElementById("borrowedBooks").textContent =
+          stats.totalBorrowed;
+        document.getElementById("totalBorrows").textContent =
+          stats.totalBorrows;
       }
 
       // Render books table
       function renderBooks() {
         const library = getLibrary();
-        const tbody = document.getElementById('booksTableBody');
-        const container = document.getElementById('booksTableContainer');
+        const tbody = document.getElementById("booksTableBody");
+        const container = document.getElementById("booksTableContainer");
 
         if (library.length === 0) {
           container.innerHTML = `
@@ -615,16 +741,18 @@
           </table>
         `;
 
-        const newTbody = document.getElementById('booksTableBody');
-        library.forEach(book => {
+        const newTbody = document.getElementById("booksTableBody");
+        library.forEach((book) => {
           const status = getBookStatus(book.availableCopies);
-          const row = document.createElement('tr');
+          const row = document.createElement("tr");
           row.innerHTML = `
             <td>${book.title}</td>
             <td>${book.author}</td>
             <td>${book.availableCopies}</td>
             <td>${book.borrowedCopies}</td>
-            <td><span class="status-badge ${status.class}">${status.label}</span></td>
+            <td><span class="status-badge ${status.class}">${
+            status.label
+          }</span></td>
             <td>${book.borrowCount || 0}</td>
           `;
           newTbody.appendChild(row);
@@ -633,9 +761,9 @@
 
       // Function 1 — Add Book
       function addBook() {
-        const titleInput = document.getElementById('bookTitle');
-        const authorInput = document.getElementById('authorName');
-        const copiesInput = document.getElementById('copies');
+        const titleInput = document.getElementById("bookTitle");
+        const authorInput = document.getElementById("authorName");
+        const copiesInput = document.getElementById("copies");
 
         const title = titleInput.value.trim();
         const author = authorInput.value.trim();
@@ -643,17 +771,17 @@
 
         // Validation
         if (!title) {
-          showMessage('Book title cannot be empty!', 'error');
+          showMessage("Book title cannot be empty!", "error");
           return;
         }
 
         if (!author) {
-          showMessage('Author name cannot be empty!', 'error');
+          showMessage("Author name cannot be empty!", "error");
           return;
         }
 
         if (isNaN(copies) || copies <= 0) {
-          showMessage('Copies must be a number greater than 0!', 'error');
+          showMessage("Copies must be a number greater than 0!", "error");
           return;
         }
 
@@ -661,31 +789,34 @@
 
         // Bonus 1 — Prevent Duplicate Books (case insensitive)
         const existingBook = library.find(
-          book => book.title.toLowerCase() === title.toLowerCase()
+          (book) => book.title.toLowerCase() === title.toLowerCase()
         );
 
         if (existingBook) {
           existingBook.availableCopies += copies;
           saveLibrary(library);
-          showMessage(`Copies added to existing book "${existingBook.title}"!`, 'success');
+          showMessage(
+            `Copies added to existing book "${existingBook.title}"!`,
+            "success"
+          );
         } else {
           const newBook = {
             title: title,
             author: author,
             availableCopies: copies,
             borrowedCopies: 0,
-            borrowCount: 0
+            borrowCount: 0,
           };
           library.push(newBook);
           saveLibrary(library);
-          showMessage(`Book "${title}" added successfully!`, 'success');
+          showMessage(`Book "${title}" added successfully!`, "success");
         }
 
         // Clear inputs and close modal
-        titleInput.value = '';
-        authorInput.value = '';
-        copiesInput.value = '';
-        closeModal('addBookModal');
+        titleInput.value = "";
+        authorInput.value = "";
+        copiesInput.value = "";
+        closeModal("addBookModal");
 
         // Refresh display
         updateStats();
@@ -694,11 +825,11 @@
 
       // Function 2 — Borrow Book
       function borrowBook() {
-        const titleInput = document.getElementById('borrowTitle');
+        const titleInput = document.getElementById("borrowTitle");
         const title = titleInput.value.trim();
 
         if (!title) {
-          showMessage('Please enter a book title!', 'error');
+          showMessage("Please enter a book title!", "error");
           return;
         }
 
@@ -706,16 +837,16 @@
 
         // Bonus 2 — Case Insensitive Search
         const book = library.find(
-          b => b.title.toLowerCase() === title.toLowerCase()
+          (b) => b.title.toLowerCase() === title.toLowerCase()
         );
 
         if (!book) {
-          showMessage(`Book "${title}" not found!`, 'error');
+          showMessage(`Book "${title}" not found!`, "error");
           return;
         }
 
         if (book.availableCopies === 0) {
-          showMessage(`No available copies of "${book.title}"!`, 'error');
+          showMessage(`No available copies of "${book.title}"!`, "error");
           return;
         }
 
@@ -726,21 +857,21 @@
         saveLibrary(library);
 
         // Bonus 4 — Confirmation Message
-        showMessage(`Book "${book.title}" borrowed successfully!`, 'success');
+        showMessage(`Book "${book.title}" borrowed successfully!`, "success");
 
-        titleInput.value = '';
-        closeModal('borrowModal');
+        titleInput.value = "";
+        closeModal("borrowModal");
         updateStats();
         renderBooks();
       }
 
       // Function 3 — Return Book
       function returnBook() {
-        const titleInput = document.getElementById('returnTitle');
+        const titleInput = document.getElementById("returnTitle");
         const title = titleInput.value.trim();
 
         if (!title) {
-          showMessage('Please enter a book title!', 'error');
+          showMessage("Please enter a book title!", "error");
           return;
         }
 
@@ -748,16 +879,19 @@
 
         // Bonus 2 — Case Insensitive Search
         const book = library.find(
-          b => b.title.toLowerCase() === title.toLowerCase()
+          (b) => b.title.toLowerCase() === title.toLowerCase()
         );
 
         if (!book) {
-          showMessage(`Book "${title}" not found!`, 'error');
+          showMessage(`Book "${title}" not found!`, "error");
           return;
         }
 
         if (book.borrowedCopies === 0) {
-          showMessage(`No borrowed copies of "${book.title}" to return!`, 'error');
+          showMessage(
+            `No borrowed copies of "${book.title}" to return!`,
+            "error"
+          );
           return;
         }
 
@@ -767,10 +901,10 @@
         saveLibrary(library);
 
         // Bonus 4 — Confirmation Message
-        showMessage(`Book "${book.title}" returned successfully!`, 'success');
+        showMessage(`Book "${book.title}" returned successfully!`, "success");
 
-        titleInput.value = '';
-        closeModal('returnModal');
+        titleInput.value = "";
+        closeModal("returnModal");
         updateStats();
         renderBooks();
       }
@@ -793,92 +927,115 @@
         `;
 
         if (library.length === 0) {
-          reportHTML += '<p style="color: #71717a; text-align: center;">No books in the library.</p>';
+          reportHTML +=
+            '<p style="color: #71717a; text-align: center;">No books in the library.</p>';
         } else {
-          reportHTML += '<h3 style="color: rgba(2, 187, 243, 1); margin-bottom: 1rem;">Book Details</h3>';
-          reportHTML += '<div style="display: flex; flex-direction: column; gap: 1rem;">';
-          
-          library.forEach(book => {
+          reportHTML +=
+            '<h3 style="color: rgba(2, 187, 243, 1); margin-bottom: 1rem;">Book Details</h3>';
+          reportHTML +=
+            '<div style="display: flex; flex-direction: column; gap: 1rem;">';
+
+          library.forEach((book) => {
             const status = getBookStatus(book.availableCopies);
             reportHTML += `
               <div style="padding: 1rem; background-color: rgba(4, 15, 46, 0.5); border-radius: 8px; border-left: 3px solid rgba(2, 187, 243, 1);">
                 <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 0.5rem;">
                   <div>
-                    <strong style="color: #f4f4f5; font-size: 1.1rem;">${book.title}</strong>
-                    <p style="color: #a1a1aa; margin-top: 0.25rem;">by ${book.author}</p>
+                    <strong style="color: #f4f4f5; font-size: 1.1rem;">${
+                      book.title
+                    }</strong>
+                    <p style="color: #a1a1aa; margin-top: 0.25rem;">by ${
+                      book.author
+                    }</p>
                   </div>
-                  <span class="status-badge ${status.class}" style="font-size: 0.75rem;">${status.label}</span>
+                  <span class="status-badge ${
+                    status.class
+                  }" style="font-size: 0.75rem;">${status.label}</span>
                 </div>
                 <div style="display: flex; gap: 2rem; margin-top: 0.75rem; flex-wrap: wrap;">
-                  <span style="color: #22c55e;">Available: ${book.availableCopies}</span>
-                  <span style="color: #eab308;">Borrowed: ${book.borrowedCopies}</span>
-                  <span style="color: #a1a1aa;">Times Borrowed: ${book.borrowCount || 0}</span>
+                  <span style="color: #22c55e;">Available: ${
+                    book.availableCopies
+                  }</span>
+                  <span style="color: #eab308;">Borrowed: ${
+                    book.borrowedCopies
+                  }</span>
+                  <span style="color: #a1a1aa;">Times Borrowed: ${
+                    book.borrowCount || 0
+                  }</span>
                 </div>
               </div>
             `;
           });
-          
-          reportHTML += '</div>';
+
+          reportHTML += "</div>";
         }
 
-        document.getElementById('reportContent').innerHTML = reportHTML;
-        openModal('reportModal');
+        document.getElementById("reportContent").innerHTML = reportHTML;
+        openModal("reportModal");
       }
 
       // Modal functions
       function openModal(modalId) {
-        document.getElementById(modalId).classList.add('active');
+        document.getElementById(modalId).classList.add("active");
       }
 
       function closeModal(modalId) {
-        document.getElementById(modalId).classList.remove('active');
+        document.getElementById(modalId).classList.remove("active");
       }
 
       function openAddBookModal() {
-        openModal('addBookModal');
-        document.getElementById('bookTitle').focus();
+        openModal("addBookModal");
+        document.getElementById("bookTitle").focus();
       }
 
       function openBorrowModal() {
-        openModal('borrowModal');
-        document.getElementById('borrowTitle').focus();
+        openModal("borrowModal");
+        document.getElementById("borrowTitle").focus();
       }
 
       function openReturnModal() {
-        openModal('returnModal');
-        document.getElementById('returnTitle').focus();
+        openModal("returnModal");
+        document.getElementById("returnTitle").focus();
       }
 
       // Close modal when clicking outside
-      window.onclick = function(event) {
-        if (event.target.classList.contains('modal')) {
-          event.target.classList.remove('active');
+      window.onclick = function (event) {
+        if (event.target.classList.contains("modal")) {
+          event.target.classList.remove("active");
         }
       };
 
       // Handle Enter key in modals
-      document.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-          if (document.getElementById('addBookModal').classList.contains('active')) {
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          if (
+            document.getElementById("addBookModal").classList.contains("active")
+          ) {
             addBook();
-          } else if (document.getElementById('borrowModal').classList.contains('active')) {
+          } else if (
+            document.getElementById("borrowModal").classList.contains("active")
+          ) {
             borrowBook();
-          } else if (document.getElementById('returnModal').classList.contains('active')) {
+          } else if (
+            document.getElementById("returnModal").classList.contains("active")
+          ) {
             returnBook();
           }
         }
-        if (event.key === 'Escape') {
-          document.querySelectorAll('.modal').forEach(modal => {
-            modal.classList.remove('active');
+        if (event.key === "Escape") {
+          document.querySelectorAll(".modal").forEach((modal) => {
+            modal.classList.remove("active");
           });
         }
       });
 
       // Initialize on page load
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener("DOMContentLoaded", function () {
         updateStats();
         renderBooks();
       });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

@@ -22,6 +22,22 @@
           <li><a href="products.html">Products</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
+        <div class="nav-buttons">
+          <button
+            class="button"
+            style="border: none"
+            onclick="studentManagement()"
+          >
+            Student Management
+          </button>
+          <button
+            class="button button-green"
+            style="border: none"
+            onclick="window.location.href='libManagementSystem.html'"
+          >
+            Library System
+          </button>
+        </div>
       </nav>
     </header>
     <main>
@@ -112,9 +128,9 @@
           <a class="category-link" href="#">Browse</a>
         </div>
       </section>
-      <section class="featured-products">
-        <h2 class="section-title">Featured Products</h2>
-        <div class="product-grid">
+      <section class="products-section">
+        <h2 class="section-title section-title-centered">Featured Products</h2>
+        <div class="products-grid">
           <div class="product-card">
             <img
               src="https://picsum.photos/seed/laptop1/400/300"
@@ -127,19 +143,44 @@
           </div>
           <div class="product-card">
             <img
-              src="https://picsum.photos/seed/phone1/400/300"
-              alt="PixelPhone 8"
+              src="https://picsum.photos/seed/laptop2/400/300"
+              alt="UltraBook Pro"
             />
-            <h3>PixelPhone 8</h3>
-            <p class="product-specs">6.7" OLED, 256GB, 5G</p>
-            <p class="product-price">$899</p>
+            <h3>UltraBook Pro</h3>
+            <p class="product-specs">Intel i9, 32GB RAM, 1TB SSD</p>
+            <p class="product-price">$2,199</p>
             <button class="button add-to-cart">Add to Cart</button>
           </div>
+          <div class="product-card">
+            <img
+              src="https://picsum.photos/seed/laptop3/400/300"
+              alt="GameBook Z"
+            />
+            <h3>GameBook Z</h3>
+            <p class="product-specs">AMD Ryzen 9, RTX 4080, 32GB RAM</p>
+            <p class="product-price">$2,799</p>
+            <button class="button add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </section>
+      <section class="bootstrap-section">
+        <h2 class="section-title section-title-centered">Bootstrap Pages</h2>
+        <div
+          style="display: flex; align-items: center; justify-content: center"
+        >
+          <button
+            class="button"
+            onclick="window.location.href='bootstrapHome.html'"
+            style="border: none; font-family: 'Orbitron', sans-serif"
+          >
+            Go to Bootstrap Home Page
+          </button>
         </div>
       </section>
     </main>
     <footer>
       <span>&copy; 2026 byteStore</span>
     </footer>
+    <script src="script.js"></script>
   </body>
 </html>

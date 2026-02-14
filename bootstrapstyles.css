@@ -1,0 +1,181 @@
+/* override/define color variables for consistent colors and fonts across the css and the bootstrap pages */
+:root {
+  --bs-body-bg: #040f2e;
+  --bs-body-color: #e4e4e7;
+  --bs-body-font-family: "Orbitron", Tahoma, Geneva, Verdana, sans-serif;
+  --nav-bg: #07163a;
+  --card-bg: #07163a;
+  --border-clr: #0c2048;
+  --accent: #02bbf3;
+  --accent-hover: #02a0d2;
+  --text-light: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --text-footer: #71717a;
+}
+
+/* then we override each default bootstrap class with our custom variables */
+
+body {
+  background-color: var(--bs-body-bg);
+}
+
+.navbar {
+  background-color: var(--nav-bg) !important; /* why? I don't know */
+  border-bottom: 1px solid var(--border-clr);
+  font-family: var(--bs-body-font-family);
+}
+.navbar-brand img {
+  height: 3rem;
+}
+.navbar .nav-link {
+  color: var(--text-muted);
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background-color 0.2s, color 0.2s;
+  padding: 0.5rem 1rem !important;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  background-color: var(--accent);
+  color: #fff;
+}
+.btn-accent {
+  background-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+.btn-accent:hover,
+.btn-accent:focus {
+  background-color: var(--accent-hover);
+  color: #fff;
+}
+
+.btn-green {
+  background-color: #22c55e;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.btn-green:hover,
+.btn-green:focus {
+  background-color: #16a34a;
+  color: #fff;
+}
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  background-color: #051234;
+}
+.hero-section img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  filter: brightness(0.5);
+  transition: filter 0.1s ease, transform 0.1s ease;
+  will-change: transform, filter;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+.hero-overlay h1 {
+  font-size: 3.5rem;
+  color: var(--text-light);
+  text-shadow: 0 5px 40px var(--accent);
+  transition: text-shadow 0.2s ease;
+}
+.hero-overlay h1:hover {
+  text-shadow: 0 5px 80px var(--accent);
+}
+.hero-overlay p {
+  font-size: 1.5rem;
+  color: var(--text-light);
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.category-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-clr);
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 32px rgba(2, 187, 243, 0.2);
+}
+.category-card .card-title {
+  color: var(--text-light);
+  font-weight: 700;
+}
+.category-card .card-text {
+  color: var(--text-muted);
+}
+
+.product-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-clr);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 32px rgba(2, 187, 243, 0.2);
+}
+.product-card img {
+  height: 200px;
+  object-fit: cover;
+}
+.product-card .card-title {
+  color: var(--text-light);
+}
+.product-specs {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.product-price {
+  color: var(--accent);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  color: var(--text-light);
+  display: inline-block;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--accent);
+}
+
+footer {
+  background-color: var(--nav-bg);
+  border-top: 1px solid var(--border-clr);
+  color: var(--text-footer);
+}
+
+@media (max-width: 767.98px) {
+  .hero-overlay h1 {
+    font-size: 2rem;
+  }
+  .hero-overlay p {
+    font-size: 1.1rem;
+  }
+  .hero-section img {
+    height: 55vh;
+    min-height: 350px;
+  }
+}

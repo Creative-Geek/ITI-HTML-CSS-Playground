@@ -50,6 +50,19 @@ nav {
   background-color: rgba(2, 160, 210, 1);
 }
 
+.button-green {
+  background-color: #22c55e;
+}
+
+.button-green:hover {
+  background-color: #16a34a;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .logoContainer {
   display: flex;
   align-items: center;
@@ -116,13 +129,8 @@ nav {
   height: 70vh;
   object-fit: cover;
   filter: brightness(0.5);
-  transition: filter 0.4s ease, transform 0.4s ease;
-}
-
-.hero:hover img {
-  filter: brightness(0.35) blur(4px);
-  transform: scale(1.02);
-  transition: filter 0.4s ease, transform 0.4s ease;
+  transition: filter 0.1s ease, transform 0.1s ease;
+  will-change: transform, filter;
 }
 
 .title {
@@ -449,9 +457,13 @@ footer {
   margin-top: 0;
 }
 
-.featured-products {
-  padding: 3rem 5%;
-  background-color: rgba(4, 15, 46, 1);
+/* Centered variation of section title */
+.section-title-centered {
+  display: inline-block;
+  width: auto;
+}
+
+.products-section:has(.section-title-centered) {
   text-align: center;
 }
 
@@ -842,4 +854,9 @@ footer {
     gap: 0.25rem;
     text-align: center;
   }
+}
+
+.bootstrap-section {
+  padding: 3rem 5%;
+  text-align: center;
 }

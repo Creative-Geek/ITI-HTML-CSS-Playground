@@ -323,6 +323,15 @@ footer {
   color: var(--text-footer);
 }
 
+/* Team member photos - make them responsive */
+.surface-card img.rounded-circle {
+  max-width: 100%;
+  height: auto;
+  width: 150px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
 /* Form controls: match the CSS-pages look while staying Bootstrap-idiomatic */
 .form-control,
 .form-select {

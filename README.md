@@ -4,7 +4,7 @@ A little tech store website I built as part of my ITI course — mostly to get m
 
 ## So, What Is This?
 
-This started as a straightforward frontend project for the ITI program: build a tech store, make it look decent, call it a day. But as I got more comfortable with JavaScript, I kept tacking things on — a library management system, a grade calculator — just to see how far I could push what I'd learned. It's not perfect, but I'm genuinely proud of how it turned out.
+This started as a straightforward frontend project for the ITI program: build a tech store, make it look decent, call it a day. But as I got more comfortable with JavaScript, I kept tacking things on — a library management system, a grade calculator, a todo list app — just to see how far I could push what I'd learned. It's not perfect, but I'm genuinely proud of how it turned out.
 
 ## Project Structure
 
@@ -14,6 +14,8 @@ This started as a straightforward frontend project for the ITI program: build a 
 ├─ products.html           # Product catalog
 ├─ contact.html            # Contact form
 ├─ libManagementSystem.html # Library management app
+├─ todoList.html           # Todo list app
+├─ miniApps.html           # Mini apps collection
 ├─ script.js               # Main JavaScript file
 ├─ styles.css              # Custom styles
 ├─ bytestorelogo.svg       # Logo
@@ -71,6 +73,14 @@ This one's more bare-bones — it runs through `prompt()` dialogs. Hit "Student 
 - 60+ → Pass
 - Below 60 → Fail
 
+### Todo List App
+
+A simple yet functional task management app accessible via "Todo List" in the nav. Features include adding, editing, and deleting tasks with localStorage persistence.
+
+### Mini Apps
+
+A collection of small utility apps bundled together — check it out via "Mini Apps" in the navigation.
+
 ## Stuff I'm Proud Of Technically
 
 ### Page Transitions
@@ -84,6 +94,10 @@ I built a custom dark theme using CSS variables with cyan accents. Bootstrap 5.3
 ### Hero Scroll Effect
 
 The hero image on the homepage reacts as you scroll — it scales up, darkens, and picks up a slight blur. Simple concept, but getting it to feel smooth took some tweaking.
+
+### Login Modal
+
+A sleek login modal that pops up over the page — no separate login page needed. It's integrated directly into the main store experience.
 
 ## Running It
 

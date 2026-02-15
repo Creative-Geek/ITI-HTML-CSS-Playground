@@ -1,143 +1,364 @@
-* {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0px;
-  padding: 0px;
+/* Mapping our variables to bootstrap's variables */
+:root {
+  --bs-body-bg: #040f2e;
+  --bs-body-color: #e4e4e7;
+  --bs-body-font-family: "Orbitron", Tahoma, Geneva, Verdana, sans-serif;
+  --nav-bg: #07163a;
+  --card-bg: #07163a;
+  --border-clr: #0c2048;
+  --accent: #02bbf3;
+  --accent-hover: #02a0d2;
+  --text-light: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --text-footer: #71717a;
+
+  --bs-secondary-color: var(--text-muted);
+  --bs-heading-color: var(--text-light);
+  --bs-border-color: var(--border-clr);
+  --bs-link-color: var(--accent);
+  --bs-link-hover-color: var(--accent-hover);
+}
+/* This is for a new api in chrome, it allows for transitions between pages */
+@view-transition {
+  navigation: auto;
 }
 
-.logoText {
-  margin-left: 5px;
+::view-transition {
+  background: var(--bs-body-bg);
 }
 
-.logo {
-  font-size: 1.5rem;
+:root {
+  view-transition-name: none;
 }
 
-nav {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  padding: 1rem 5%;
-  background-color: rgb(28, 100, 163);
-  color: white;
+body {
+  view-transition-name: page;
+  min-height: 100vh;
 }
 
-.navItems {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+::view-transition-group(page) {
+  animation-duration: 0.7s;
+}
+
+@keyframes shrink {
+  to {
+    scale: 0.8;
+    opacity: 0.5;
+  }
+}
+
+@keyframes grow {
+  from {
+    scale: 0.8;
+    opacity: 0.5;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    translate: 100vw 0;
+  }
+}
+
+@keyframes slide-out {
+  to {
+    translate: 100vw 0;
+  }
+}
+
+@keyframes scale-up {
+  from {
+    scale: 0;
+  }
+}
+
+@keyframes scale-down {
+  to {
+    scale: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+::view-transition-old(page) {
+  animation: 500ms ease-out both slide-out;
+}
+
+::view-transition-new(page) {
+  animation: 500ms ease-out both slide-in;
+}
+
+html:active-view-transition-type(reload)::view-transition-old(page) {
+  display: none;
+}
+
+html:active-view-transition-type(reload)::view-transition-new(page) {
+  animation-name: fade-in, scale-up;
+  animation-duration: 700ms;
+}
+
+html:active-view-transition-type(push)::view-transition-old(page) {
+  animation-name: shrink;
+  animation-duration: 700ms;
+  transform-origin: 100% 50%;
+}
+
+html:active-view-transition-type(push)::view-transition-new(page) {
+  animation-name: slide-in;
+  animation-duration: 700ms;
+}
+
+html:active-view-transition-type(pop)::view-transition-old(page) {
+  animation-name: slide-out;
+  animation-duration: 700ms;
+  z-index: 1;
+}
+
+html:active-view-transition-type(pop)::view-transition-new(page) {
+  animation-name: grow;
+  animation-duration: 700ms;
+  transform-origin: 100% 50%;
+}
+
+body {
+  background-color: var(--bs-body-bg);
+  font-family: var(--bs-body-font-family);
+}
+
+.page-header-gradient {
+  background: linear-gradient(135deg, #051234 0%, #07163a 100%);
+}
+
+.bg-nav {
+  background-color: var(--nav-bg) !important;
+}
+
+.surface-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-clr);
+}
+
+.text-accent {
+  color: var(--accent) !important;
+}
+
+.navbar {
+  background-color: var(--nav-bg) !important; /* why? I don't know */
+  border-bottom: 1px solid var(--border-clr);
+  font-family: var(--bs-body-font-family);
+
+  --bs-navbar-toggler-border-color: var(--border-clr);
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(244, 244, 245, 0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar .navbar-toggler {
+  border-color: var(--border-clr);
+}
+.navbar-brand img {
+  height: 3rem;
+}
+.navbar .nav-link {
+  color: var(--text-muted);
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background-color 0.2s, color 0.2s;
+  padding: 0.5rem 1rem !important;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  background-color: var(--accent);
+  color: #fff;
+}
+.btn-accent {
+  background-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+.btn-accent:hover,
+.btn-accent:focus {
+  background-color: var(--accent-hover);
+  color: #fff;
+}
+
+.btn-green {
+  background-color: #22c55e;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.btn-green:hover,
+.btn-green:focus {
+  background-color: #16a34a;
+  color: #fff;
+}
+
+.btn-red {
+  background-color: #dc3545;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.btn-red:hover,
+.btn-red:focus {
+  background-color: #c82333;
+  color: #fff;
+}
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  background-color: #051234;
+}
+.hero-section img {
   width: 100%;
-}
-.navItems li,
-a {
-  list-style-type: none;
-  text-decoration: none;
-  padding: 10px;
-  margin: 0;
-  color: white;
-  border-radius: 20px;
-  cursor: pointer;
-}
-.navItems li {
-  background-color: rgb(77, 164, 240);
-  transition: all 0.3s ease-in-out;
-}
-.navItems li:hover,
-a:hover {
-  background-color: rgb(0, 136, 255);
-}
-
-.navItems li:hover {
-  background-color: rgb(0, 136, 255);
-  transition: all 0.3s ease-in-out;
-}
-
-.logoContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  margin-right: 10vw;
-  width: 200px;
-}
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative; /* this makes any absolute children position relative to this element */
-}
-
-.hero img {
-  width: 100%;
-  filter: blur(0px);
   height: 70vh;
   object-fit: cover;
-  transition: all 0.3s ease-in-out;
+  filter: brightness(0.5);
+  transition: filter 0.1s ease, transform 0.1s ease;
+  will-change: transform, filter;
 }
-
-.hero img:hover {
-  filter: blur(5px);
-  transition: all 0.3s ease-in-out;
-}
-
-.title {
-  /* ~~it feels like it's a bit to the bottom more than the top, I don't know why~~ see the comment on the hero class */
+.hero-overlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
-  font-size: 3rem;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-}
-.product-categories {
+  inset: 0;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
-  gap: 2rem;
-  padding: 5rem;
+  padding: 1rem;
+}
+.hero-overlay h1 {
+  font-size: 3.5rem;
+  color: var(--text-light);
+  text-shadow: 0 5px 40px var(--accent);
+  transition: text-shadow 0.2s ease;
+}
+.hero-overlay h1:hover {
+  text-shadow: 0 5px 80px var(--accent);
+}
+.hero-overlay p {
+  font-size: 1.5rem;
+  color: var(--text-light);
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .category-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 2rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-clr);
   border-radius: 1rem;
-  background-color: white;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 32px rgba(2, 187, 243, 0.2);
+}
+.category-card .card-title {
+  color: var(--text-light);
+  font-weight: 700;
+}
+.category-card .card-text {
+  color: var(--text-muted);
 }
 
-.category-image {
-  /* width: 200px;
+.product-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-clr);
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 32px rgba(2, 187, 243, 0.2);
+}
+.product-card img {
   height: 200px;
-  object-fit: cover; */
-  font-size: 5rem;
-  /* text-align: center; */
+  object-fit: cover;
+}
+.product-card .card-title {
+  color: var(--text-light);
+}
+.product-specs {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.product-price {
+  color: var(--accent);
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
-.category-title {
-  font-size: 2rem;
-  margin-top: 1rem;
-}
-
-.category-description {
-  font-size: 1rem;
-  margin-top: 1rem;
+.section-title {
+  font-size: 1.75rem;
+  color: var(--text-light);
+  display: inline-block;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--accent);
 }
 
 footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  background-color: rgb(28, 100, 163);
-  color: white;
-  text-align: center;
+  background-color: var(--nav-bg);
+  border-top: 1px solid var(--border-clr);
+  color: var(--text-footer);
+}
+
+.surface-card img.rounded-circle {
+  max-width: 100%;
+  height: auto;
+  width: 150px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.form-control,
+.form-select {
+  background-color: var(--card-bg);
+  border-color: var(--border-clr);
+  color: var(--text-light);
+}
+
+.form-control::placeholder {
+  color: var(--text-footer);
+  opacity: 1;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background-color: var(--card-bg);
+  border-color: var(--accent);
+  color: var(--text-light);
+  box-shadow: 0 0 0 0.25rem rgba(2, 187, 243, 0.25);
+}
+
+@media (max-width: 767.98px) {
+  .hero-overlay h1 {
+    font-size: 2rem;
+  }
+  .hero-overlay p {
+    font-size: 1.1rem;
+  }
+  .hero-section img {
+    height: 55vh;
+    min-height: 350px;
+  }
 }

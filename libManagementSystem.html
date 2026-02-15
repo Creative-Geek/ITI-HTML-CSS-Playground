@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Library Management System — ByteShop</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .library-container {
+        display: flex;
+        gap: 2rem;
+        padding: 3rem 5%;
+        background-color: rgba(4, 15, 46, 1);
+        min-height: calc(100vh - 200px);
+      }
+
+      .library-sidebar {
+        flex: 0 0 300px;
+        background-color: rgba(7, 22, 58, 1);
+        border: 1px solid rgba(12, 32, 72, 1);
+        border-radius: 1rem;
+        padding: 2rem;
+        height: fit-content;
+      }
+
+      .library-sidebar h2 {
+        color: #f4f4f5;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        text-shadow: 0 5px 40px rgba(2, 187, 243, 0.5);
+      }
+
+      .menu-btn {
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        border: none;
+        border-radius: 8px;
+        background-color: rgba(2, 187, 243, 1);
+        color: #fff;
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+      }
+
+      .menu-btn:hover {
+        background-color: rgba(2, 160, 210, 1);
+        transform: translateX(5px);
+      }
+
+      .menu-btn.secondary {
+        background-color: rgba(12, 32, 72, 1);
+        border: 1px solid rgba(2, 187, 243, 1);
+      }
+
+      .menu-btn.secondary:hover {
+        background-color: rgba(2, 187, 243, 0.2);
+      }
+
+      .library-main {
+        flex: 1;
+      }
+
+      .stats-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-box {
+        background-color: rgba(7, 22, 58, 1);
+        border: 1px solid rgba(12, 32, 72, 1);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        text-align: center;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .stat-box:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 32px rgba(2, 187, 243, 0.2);
+      }
+
+      .stat-box h3 {
+        color: rgba(2, 187, 243, 1);
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-box p {
+        color: #a1a1aa;
+        font-size: 0.95rem;
+      }
+
+      .books-section {
+        background-color: rgba(7, 22, 58, 1);
+        border: 1px solid rgba(12, 32, 72, 1);
+        border-radius: 1rem;
+        padding: 2rem;
+      }
+
+      .books-section h2 {
+        color: #f4f4f5;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .books-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .books-table th,
+      .books-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(12, 32, 72, 1);
+      }
+
+      .books-table th {
+        color: rgba(2, 187, 243, 1);
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .books-table td {
+        color: #e4e4e7;
+      }
+
+      .books-table tr:hover td {
+        background-color: rgba(4, 15, 46, 0.5);
+      }
+
+      .status-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .status-available {
+        background-color: rgba(34, 197, 94, 0.2);
+        color: #22c55e;
+      }
+
+      .status-limited {
+        background-color: rgba(234, 179, 8, 0.2);
+        color: #eab308;
+      }
+
+      .status-out {
+        background-color: rgba(239, 68, 68, 0.2);
+        color: #ef4444;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background-color: rgba(7, 22, 58, 1);
+        border: 1px solid rgba(12, 32, 72, 1);
+        border-radius: 1rem;
+        padding: 2.5rem;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content h2 {
+        color: #f4f4f5;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        color: #f4f4f5;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        border: 1px solid rgba(12, 32, 72, 1);
+        background-color: rgba(4, 15, 46, 1);
+        color: #f4f4f5;
+        font-family: inherit;
+        font-size: 1rem;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: rgba(2, 187, 243, 1);
+      }
+
+      .form-group input::placeholder {
+        color: #71717a;
+      }
+
+      .modal-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .modal-buttons button {
+        flex: 1;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 8px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      .btn-primary {
+        background-color: rgba(2, 187, 243, 1);
+        color: #fff;
+      }
+
+      .btn-primary:hover {
+        background-color: rgba(2, 160, 210, 1);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        border: 1px solid rgba(2, 187, 243, 1) !important;
+        color: rgba(2, 187, 243, 1);
+      }
+
+      .btn-secondary:hover {
+        background-color: rgba(2, 187, 243, 0.2);
+      }
+
+      .message {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        z-index: 2000;
+        animation: slideIn 0.3s ease;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .message.success {
+        background-color: rgba(34, 197, 94, 0.2);
+        border: 1px solid #22c55e;
+        color: #22c55e;
+      }
+
+      .message.error {
+        background-color: rgba(239, 68, 68, 0.2);
+        border: 1px solid #ef4444;
+        color: #ef4444;
+      }
+
+      .message.info {
+        background-color: rgba(2, 187, 243, 0.2);
+        border: 1px solid rgba(2, 187, 243, 1);
+        color: rgba(2, 187, 243, 1);
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 3rem;
+        color: #71717a;
+      }
+
+      .empty-state svg {
+        margin-bottom: 1rem;
+        opacity: 0.5;
+      }
+
+      /* Tablet and below */
+      @media (max-width: 991.98px) {
+        .library-container {
+          flex-direction: column;
+          padding: 2rem 1rem;
+          gap: 1.5rem;
+        }
+
+        .library-sidebar {
+          flex: none;
+          width: 100%;
+        }
+
+        .stats-cards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 767.98px) {
+        .library-container {
+          padding: 1.5rem 1rem;
+        }
+
+        .library-sidebar {
+          padding: 1.5rem;
+        }
+
+        .library-sidebar h2 {
+          font-size: 1.25rem;
+        }
+
+        .menu-btn {
+          padding: 0.875rem;
+          font-size: 0.9rem;
+        }
+
+        .books-section {
+          padding: 1.5rem;
+        }
+
+        .books-section h2 {
+          font-size: 1.25rem;
+        }
+
+        .books-table {
+          font-size: 0.85rem;
+        }
+
+        .books-table th,
+        .books-table td {
+          padding: 0.75rem 0.5rem;
+        }
+
+        .status-badge {
+          padding: 0.2rem 0.5rem;
+          font-size: 0.7rem;
+        }
+
+        .modal-content {
+          padding: 2rem 1.5rem;
+          width: 95%;
+        }
+
+        .modal-content h2 {
+          font-size: 1.25rem;
+        }
+
+        .stat-box {
+          padding: 1.25rem;
+        }
+
+        .stat-box h3 {
+          font-size: 1.75rem;
+        }
+      }
+
+      /* Small mobile */
+      @media (max-width: 575.98px) {
+        .stats-cards {
+          grid-template-columns: 1fr;
+        }
+
+        .modal-buttons {
+          flex-direction: column;
+        }
+
+        .modal-buttons button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+      <div class="container-fluid px-4">
+        <a class="navbar-brand" href="index.html">
+          <img src="bytestorelogo.svg" alt="byteStore Logo" />
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNav"
+          aria-controls="mainNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav mx-auto gap-1">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="products.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+          <div class="d-grid gap-2 d-lg-flex">
+            <a class="btn btn-green" onclick="login()" type="button">Login</a>
+            <a href="miniApps.html" class="btn btn-accent" type="button">
+              Mini Apps
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="text-center py-5 page-header-gradient">
+        <div class="container">
+          <h1 class="fw-bold mb-3">Library Management System</h1>
+          <p class="lead text-body-secondary">
+            Manage your book collection with ease
+          </p>
+        </div>
+      </section>
+
+      <div class="library-container">
+        <aside class="library-sidebar">
+          <h2>Menu</h2>
+          <button class="menu-btn" onclick="openAddBookModal()">
+            Add New Book
+          </button>
+          <button class="menu-btn secondary" onclick="openBorrowModal()">
+            Borrow Book
+          </button>
+          <button class="menu-btn secondary" onclick="openReturnModal()">
+            Return Book
+          </button>
+          <button class="menu-btn secondary" onclick="showReport()">
+            Show Report
+          </button>
+        </aside>
+
+        <div class="library-main">
+          <div class="stats-cards">
+            <div class="stat-box">
+              <h3 id="totalBooks">0</h3>
+              <p>Total Books</p>
+            </div>
+            <div class="stat-box">
+              <h3 id="availableBooks">0</h3>
+              <p>Available Copies</p>
+            </div>
+            <div class="stat-box">
+              <h3 id="borrowedBooks">0</h3>
+              <p>Borrowed Copies</p>
+            </div>
+            <div class="stat-box">
+              <h3 id="totalBorrows">0</h3>
+              <p>Total Borrows</p>
+            </div>
+          </div>
+
+          <div class="books-section">
+            <h2>Library Collection</h2>
+            <div class="table-responsive" id="booksTableContainer">
+              <table class="books-table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Available</th>
+                    <th>Borrowed</th>
+                    <th>Status</th>
+                    <th>Borrow Count</th>
+                  </tr>
+                </thead>
+                <tbody id="booksTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="addBookModal" class="modal">
+      <div class="modal-content">
+        <h2>Add New Book</h2>
+        <div class="form-group">
+          <label for="bookTitle">Book Title</label>
+          <input type="text" id="bookTitle" placeholder="Enter book title" />
+        </div>
+        <div class="form-group">
+          <label for="authorName">Author Name</label>
+          <input type="text" id="authorName" placeholder="Enter author name" />
+        </div>
+        <div class="form-group">
+          <label for="copies">Number of Copies</label>
+          <input
+            type="number"
+            id="copies"
+            placeholder="Enter number of copies"
+            min="1"
+          />
+        </div>
+        <div class="modal-buttons">
+          <button class="btn-primary" onclick="addBook()">Add Book</button>
+          <button class="btn-secondary" onclick="closeModal('addBookModal')">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="borrowModal" class="modal">
+      <div class="modal-content">
+        <h2>Borrow Book</h2>
+        <div class="form-group">
+          <label for="borrowTitle">Book Title</label>
+          <input
+            type="text"
+            id="borrowTitle"
+            placeholder="Enter book title to borrow"
+          />
+        </div>
+        <div class="modal-buttons">
+          <button class="btn-primary" onclick="borrowBook()">Borrow</button>
+          <button class="btn-secondary" onclick="closeModal('borrowModal')">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="returnModal" class="modal">
+      <div class="modal-content">
+        <h2>Return Book</h2>
+        <div class="form-group">
+          <label for="returnTitle">Book Title</label>
+          <input
+            type="text"
+            id="returnTitle"
+            placeholder="Enter book title to return"
+          />
+        </div>
+        <div class="modal-buttons">
+          <button class="btn-primary" onclick="returnBook()">Return</button>
+          <button class="btn-secondary" onclick="closeModal('returnModal')">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="reportModal" class="modal">
+      <div class="modal-content" style="max-width: 700px">
+        <h2>Library Report</h2>
+        <div
+          id="reportContent"
+          style="max-height: 400px; overflow-y: auto"
+        ></div>
+        <div class="modal-buttons" style="margin-top: 1.5rem">
+          <button class="btn-secondary" onclick="closeModal('reportModal')">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-center py-4">
+      <span>&copy; 2026 byteStore — Library Management System</span>
+    </footer>
+
+    <script>
+      const LIBRARY_KEY = "byteStore_library";
+
+      function getLibrary() {
+        const stored = localStorage.getItem(LIBRARY_KEY);
+        return stored ? JSON.parse(stored) : [];
+      }
+
+      function saveLibrary(library) {
+        localStorage.setItem(LIBRARY_KEY, JSON.stringify(library));
+      }
+
+      function showMessage(text, type = "info") {
+        const existing = document.querySelector(".message");
+        if (existing) existing.remove();
+
+        const message = document.createElement("div");
+        message.className = `message ${type}`;
+        message.textContent = text;
+        document.body.appendChild(message);
+
+        setTimeout(() => {
+          message.remove();
+        }, 3000);
+      }
+
+      function getBookStatus(availableCopies) {
+        if (availableCopies > 2)
+          return { label: "Available", class: "status-available" };
+        if (availableCopies >= 1)
+          return { label: "Limited", class: "status-limited" };
+        return { label: "Out of Stock", class: "status-out" };
+      }
+
+      function calculateTotalBooks() {
+        const library = getLibrary();
+        let totalAvailable = 0;
+        let totalBorrowed = 0;
+        let totalBorrows = 0;
+
+        library.forEach((book) => {
+          totalAvailable += book.availableCopies;
+          totalBorrowed += book.borrowedCopies;
+          totalBorrows += book.borrowCount || 0;
+        });
+
+        return {
+          totalAvailable,
+          totalBorrowed,
+          totalBooks: library.length,
+          totalBorrows,
+        };
+      }
+
+      function updateStats() {
+        const stats = calculateTotalBooks();
+        document.getElementById("totalBooks").textContent = stats.totalBooks;
+        document.getElementById("availableBooks").textContent =
+          stats.totalAvailable;
+        document.getElementById("borrowedBooks").textContent =
+          stats.totalBorrowed;
+        document.getElementById("totalBorrows").textContent =
+          stats.totalBorrows;
+      }
+
+      function renderBooks() {
+        const library = getLibrary();
+        const tbody = document.getElementById("booksTableBody");
+        const container = document.getElementById("booksTableContainer");
+
+        if (library.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+              <p>No books in the library yet.</p>
+              <p>Add your first book using the menu!</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = `
+          <table class="books-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Available</th>
+                <th>Borrowed</th>
+                <th>Status</th>
+                <th>Borrow Count</th>
+              </tr>
+            </thead>
+            <tbody id="booksTableBody">
+            </tbody>
+          </table>
+        `;
+
+        const newTbody = document.getElementById("booksTableBody");
+        library.forEach((book) => {
+          const status = getBookStatus(book.availableCopies);
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${book.title}</td>
+            <td>${book.author}</td>
+            <td>${book.availableCopies}</td>
+            <td>${book.borrowedCopies}</td>
+            <td><span class="status-badge ${status.class}">${
+            status.label
+          }</span></td>
+            <td>${book.borrowCount || 0}</td>
+          `;
+          newTbody.appendChild(row);
+        });
+      }
+
+      function addBook() {
+        const titleInput = document.getElementById("bookTitle");
+        const authorInput = document.getElementById("authorName");
+        const copiesInput = document.getElementById("copies");
+
+        const title = titleInput.value.trim();
+        const author = authorInput.value.trim();
+        const copies = parseInt(copiesInput.value);
+
+        if (!title) {
+          showMessage("Book title cannot be empty!", "error");
+          return;
+        }
+
+        if (!author) {
+          showMessage("Author name cannot be empty!", "error");
+          return;
+        }
+
+        if (isNaN(copies) || copies <= 0) {
+          showMessage("Copies must be a number greater than 0!", "error");
+          return;
+        }
+
+        let library = getLibrary();
+
+        const existingBook = library.find(
+          (book) => book.title.toLowerCase() === title.toLowerCase()
+        );
+
+        if (existingBook) {
+          existingBook.availableCopies += copies;
+          saveLibrary(library);
+          showMessage(
+            `Copies added to existing book "${existingBook.title}"!`,
+            "success"
+          );
+        } else {
+          const newBook = {
+            title: title,
+            author: author,
+            availableCopies: copies,
+            borrowedCopies: 0,
+            borrowCount: 0,
+          };
+          library.push(newBook);
+          saveLibrary(library);
+          showMessage(`Book "${title}" added successfully!`, "success");
+        }
+
+        titleInput.value = "";
+        authorInput.value = "";
+        copiesInput.value = "";
+        closeModal("addBookModal");
+
+        updateStats();
+        renderBooks();
+      }
+
+      function borrowBook() {
+        const titleInput = document.getElementById("borrowTitle");
+        const title = titleInput.value.trim();
+
+        if (!title) {
+          showMessage("Please enter a book title!", "error");
+          return;
+        }
+
+        let library = getLibrary();
+
+        const book = library.find(
+          (b) => b.title.toLowerCase() === title.toLowerCase()
+        );
+
+        if (!book) {
+          showMessage(`Book "${title}" not found!`, "error");
+          return;
+        }
+
+        if (book.availableCopies === 0) {
+          showMessage(`No available copies of "${book.title}"!`, "error");
+          return;
+        }
+
+        book.availableCopies--;
+        book.borrowedCopies++;
+        book.borrowCount = (book.borrowCount || 0) + 1;
+        saveLibrary(library);
+
+        showMessage(`Book "${book.title}" borrowed successfully!`, "success");
+
+        titleInput.value = "";
+        closeModal("borrowModal");
+        updateStats();
+        renderBooks();
+      }
+
+      function returnBook() {
+        const titleInput = document.getElementById("returnTitle");
+        const title = titleInput.value.trim();
+
+        if (!title) {
+          showMessage("Please enter a book title!", "error");
+          return;
+        }
+
+        let library = getLibrary();
+
+        const book = library.find(
+          (b) => b.title.toLowerCase() === title.toLowerCase()
+        );
+
+        if (!book) {
+          showMessage(`Book "${title}" not found!`, "error");
+          return;
+        }
+
+        if (book.borrowedCopies === 0) {
+          showMessage(
+            `No borrowed copies of "${book.title}" to return!`,
+            "error"
+          );
+          return;
+        }
+
+        book.availableCopies++;
+        book.borrowedCopies--;
+        saveLibrary(library);
+
+        showMessage(`Book "${book.title}" returned successfully!`, "success");
+
+        titleInput.value = "";
+        closeModal("returnModal");
+        updateStats();
+        renderBooks();
+      }
+
+      function showReport() {
+        const library = getLibrary();
+        const stats = calculateTotalBooks();
+
+        let reportHTML = `
+          <div style="margin-bottom: 2rem; padding: 1.5rem; background-color: rgba(4, 15, 46, 0.5); border-radius: 8px;">
+            <h3 style="color: rgba(2, 187, 243, 1); margin-bottom: 1rem;">Library Statistics</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+              <div><strong style="color: #f4f4f5;">Total Books:</strong> <span style="color: #a1a1aa;">${stats.totalBooks}</span></div>
+              <div><strong style="color: #f4f4f5;">Total Borrows:</strong> <span style="color: #a1a1aa;">${stats.totalBorrows}</span></div>
+              <div><strong style="color: #f4f4f5;">Available Copies:</strong> <span style="color: #22c55e;">${stats.totalAvailable}</span></div>
+              <div><strong style="color: #f4f4f5;">Borrowed Copies:</strong> <span style="color: #eab308;">${stats.totalBorrowed}</span></div>
+            </div>
+          </div>
+        `;
+
+        if (library.length === 0) {
+          reportHTML +=
+            '<p style="color: #71717a; text-align: center;">No books in the library.</p>';
+        } else {
+          reportHTML +=
+            '<h3 style="color: rgba(2, 187, 243, 1); margin-bottom: 1rem;">Book Details</h3>';
+          reportHTML +=
+            '<div style="display: flex; flex-direction: column; gap: 1rem;">';
+
+          library.forEach((book) => {
+            const status = getBookStatus(book.availableCopies);
+            reportHTML += `
+              <div style="padding: 1rem; background-color: rgba(4, 15, 46, 0.5); border-radius: 8px; border-left: 3px solid rgba(2, 187, 243, 1);">
+                <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 0.5rem;">
+                  <div>
+                    <strong style="color: #f4f4f5; font-size: 1.1rem;">${
+                      book.title
+                    }</strong>
+                    <p style="color: #a1a1aa; margin-top: 0.25rem;">by ${
+                      book.author
+                    }</p>
+                  </div>
+                  <span class="status-badge ${
+                    status.class
+                  }" style="font-size: 0.75rem;">${status.label}</span>
+                </div>
+                <div style="display: flex; gap: 2rem; margin-top: 0.75rem; flex-wrap: wrap;">
+                  <span style="color: #22c55e;">Available: ${
+                    book.availableCopies
+                  }</span>
+                  <span style="color: #eab308;">Borrowed: ${
+                    book.borrowedCopies
+                  }</span>
+                  <span style="color: #a1a1aa;">Times Borrowed: ${
+                    book.borrowCount || 0
+                  }</span>
+                </div>
+              </div>
+            `;
+          });
+
+          reportHTML += "</div>";
+        }
+
+        document.getElementById("reportContent").innerHTML = reportHTML;
+        openModal("reportModal");
+      }
+
+      function openModal(modalId) {
+        document.getElementById(modalId).classList.add("active");
+      }
+
+      function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove("active");
+      }
+
+      function openAddBookModal() {
+        openModal("addBookModal");
+        document.getElementById("bookTitle").focus();
+      }
+
+      function openBorrowModal() {
+        openModal("borrowModal");
+        document.getElementById("borrowTitle").focus();
+      }
+
+      function openReturnModal() {
+        openModal("returnModal");
+        document.getElementById("returnTitle").focus();
+      }
+
+      window.onclick = function (event) {
+        if (event.target.classList.contains("modal")) {
+          event.target.classList.remove("active");
+        }
+      };
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          if (
+            document.getElementById("addBookModal").classList.contains("active")
+          ) {
+            addBook();
+          } else if (
+            document.getElementById("borrowModal").classList.contains("active")
+          ) {
+            borrowBook();
+          } else if (
+            document.getElementById("returnModal").classList.contains("active")
+          ) {
+            returnBook();
+          }
+        }
+        if (event.key === "Escape") {
+          document.querySelectorAll(".modal").forEach((modal) => {
+            modal.classList.remove("active");
+          });
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        updateStats();
+        renderBooks();
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -13,7 +13,7 @@ This script file is split into 4 sections:
 function login() {
   // Create modal HTML
   const modalHTML = `
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel">
       <div class="modal-dialog">
         <div class="modal-content bg-surface">
           <div class="modal-header">
@@ -112,6 +112,12 @@ function login() {
     }
 
     if (isValid) {
+      // Remove focus from the submit button to prevent accessibility warnings
+      // when the modal hides and sets aria-hidden="true"
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+
       // Close modal
       modal.hide();
 
@@ -192,7 +198,7 @@ window.addEventListener("pagereveal", async (e) => {
 function studentManagement() {
   if (
     prompt(
-      "Welcome to the student grade calculator! do you want to continue?(y/n)"
+      "Welcome to the student grade calculator! do you want to continue?(y/n)",
     ).toLowerCase() !== "y"
   ) {
     return;
@@ -367,7 +373,7 @@ document.addEventListener("DOMContentLoaded", function () {
       nameInput.setCustomValidity("Name cannot exceed 100 characters.");
     } else if (!pattern.test(value)) {
       nameInput.setCustomValidity(
-        "Name can only contain letters (including Arabic), spaces, and hyphens."
+        "Name can only contain letters (including Arabic), spaces, and hyphens.",
       );
     } else {
       nameInput.setCustomValidity("");
@@ -404,11 +410,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (value.length < 10) {
       messageTextarea.setCustomValidity(
-        "Message must be at least 10 characters."
+        "Message must be at least 10 characters.",
       );
     } else if (value.length > 2000) {
       messageTextarea.setCustomValidity(
-        "Message cannot exceed 2000 characters."
+        "Message cannot exceed 2000 characters.",
       );
     } else {
       messageTextarea.setCustomValidity("");
@@ -490,7 +496,7 @@ document.addEventListener("DOMContentLoaded", function () {
               if (field) {
                 field.classList.remove("is-valid", "is-invalid");
               }
-            }
+            },
           );
 
           // Reset character counter
